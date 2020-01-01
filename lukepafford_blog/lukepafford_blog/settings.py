@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
     # Custom apps
+    "user.apps.UserConfig",
     "blog.apps.BlogConfig",
 ]
 
@@ -124,6 +125,7 @@ AUTHENTICATION_BACKENDS = (
     "allauth.account.auth_backends.AuthenticationBackend",
 )
 SITE_ID = 1
+AUTH_USER_MODEL = "user.User"
 
 # Provider specific settings
 # SOCIALACCOUNT_PROVIDERS = {
