@@ -1,0 +1,35 @@
+{
+  "name": "lukepafford_blog",
+  "version": "1.0.0",
+  "description": "Front end assets for lukepafford blog",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "watch": "webpack --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lukepafford/lukepafford_site.git"
+  },
+  "author": "Luke Pafford",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lukepafford/lukepafford_site/issues"
+  },
+  "homepage": "https://github.com/lukepafford/lukepafford_site#readme",
+  "dependencies": {
+    "@babel/polyfill": "^7.7.0",
+    "jquery": "^3.4.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.7.7",
+    "@babel/core": "^7.7.7",
+    "@babel/preset-env": "^7.7.7",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.6",
+    "babel-preset-env": "^1.7.0",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10"
+  }
+}
