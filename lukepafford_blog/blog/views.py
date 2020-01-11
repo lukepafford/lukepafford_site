@@ -4,6 +4,7 @@ from django.views import View
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import ListView, DetailView
 from .models import Posts
 from .forms import UploadPostForm
 from .markdown_parser import parse_yaml_post
@@ -13,22 +14,20 @@ class HomeView(TemplateView):
     template_name = "_base.html"
 
 
-class PostList(View):
-    def get(self, request):
-        posts = Posts.objects.all()
-        return render(request, "posts/post_list.html", {"posts": posts})
+class PostList(ListView):
+    model = Posts
+    context_object_name = "posts"
 
 
-class PostDetail(View):
-    def get(self, request, post_id):
-        post = get_object_or_404(Posts, pk=post_id)
-        return render(request, "posts/post_detail.html", {"post": post})
+class PostDetail(DetailView):
+    model = Posts
+    context_object_name = "post"
 
 
-class PostUpload(LoginRequiredMixin, View):
+class PostUpload(LoginRequiredMixin, DetailView):
     def get(self, request):
         form = UploadPostForm
-        return render(request, "posts/post_upload.html", {"form": form})
+        return render(request, "blog/post_upload.html", {"form": form})
 
     def post(self, request):
         form = UploadPostForm(request.POST, request.FILES)
