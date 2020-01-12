@@ -17,6 +17,7 @@ class HomeView(TemplateView):
 class PostList(ListView):
     model = Posts
     context_object_name = "posts"
+    paginate_by = 10
 
 
 class PostDetail(DetailView):
