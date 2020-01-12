@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
+    "markdown_deux",
     # Custom apps
     "user.apps.UserConfig",
     "blog.apps.BlogConfig",
@@ -143,6 +144,25 @@ AUTH_USER_MODEL = "user.User"
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
+
+# Markdown settings
+MARKDOWN_DEUX_STYLES = {
+    "default": {
+        #       "safe_mode": "escape",
+        "extras": {
+            "code-friendly": None,
+            "pyshell": None,
+            "demote-headers": 1,
+            "html-classes": {"pre": "prettyprint"},
+            "cuddled-lists": None,
+            "footnotes": None,
+            "header-ids": None,
+            "fenced-code-blocks": None,
+            "metadata": None,
+            "tables": None,
+        },
+    },
+}
 
 LANGUAGE_CODE = "en-us"
 
