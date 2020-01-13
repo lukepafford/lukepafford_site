@@ -34,7 +34,12 @@ class PostUpload(LoginRequiredMixin, DetailView):
         form = UploadPostForm(request.POST, request.FILES)
         if form.is_valid():
             parsed_data = parse_yaml_post(form.cleaned_data["file"])
-            post = Posts()
+
+            # Overwrite existing post if title is the same
+            post = Posts.objects.get(title=parsed_data["title"])
+            if not post:
+                post = Posts()
+
             post.title = parsed_data["title"]
             post.body = parsed_data["body"]
             post.author = request.user

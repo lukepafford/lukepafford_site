@@ -5,7 +5,7 @@ from django.template.defaultfilters import slugify
 
 
 class Posts(models.Model):
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(max_length=100)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     created_on = models.DateTimeField(auto_now_add=True)
