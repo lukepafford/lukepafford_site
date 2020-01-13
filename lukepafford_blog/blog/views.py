@@ -39,4 +39,4 @@ class PostUpload(LoginRequiredMixin, DetailView):
             post.body = parsed_data["body"]
             post.author = request.user
             post.save()
-        return redirect("post_list")
+        return redirect("posts_list")
