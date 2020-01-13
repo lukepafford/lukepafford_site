@@ -36,8 +36,9 @@ class PostUpload(LoginRequiredMixin, DetailView):
             parsed_data = parse_yaml_post(form.cleaned_data["file"])
 
             # Overwrite existing post if title is the same
-            post = Posts.objects.get(title=parsed_data["title"])
-            if not post:
+            try:
+                post = Posts.objects.get(title=parsed_data["title"])
+            except Posts.DoesNotExist:
                 post = Posts()
 
             post.title = parsed_data["title"]
