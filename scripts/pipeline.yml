@@ -20,3 +20,12 @@
 
     - import_tasks: build.yml
       when: deployApp
+
+- hosts: app
+  become: true
+  tasks:
+    - name: Restart the app
+      service:
+        name: lukepafford_blog
+        state: restarted
+        enabled: yes

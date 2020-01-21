@@ -36,6 +36,11 @@ SECRET_KEY = env("SECRET_KEY")
 
 SQLITE_URL = env("SQLITE_URL")
 
+if DEBUG:
+    ALLOWED_HOSTS = ["192.168.1.21"]
+else:
+    ALLOWED_HOSTS = ["192.168.1.21"]
+
 # CACHES = {
 #    # read os.environ['CACHE_URL'] and raises ImproperlyConfigured exception if not found
 #    'default': env.cache(),
