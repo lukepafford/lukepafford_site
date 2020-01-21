@@ -24,13 +24,17 @@ env = environ.Env(
     DEBUG=(bool, False)
 )
 # reading .env file
-environ.Env.read_env()
+environ.Env.read_env(
+    env.str("ENV_PATH", os.path.join(BASE_DIR, "lukepafford_blog", ".env"))
+)
 
 # False if not in os.environ
 DEBUG = env("DEBUG")
 
 # Raises django's ImproperlyConfigured exception if SECRET_KEY not in os.environ
 SECRET_KEY = env("SECRET_KEY")
+
+SQLITE_URL = env("SQLITE_URL")
 
 # CACHES = {
 #    # read os.environ['CACHE_URL'] and raises ImproperlyConfigured exception if not found
@@ -98,12 +102,7 @@ WSGI_APPLICATION = "lukepafford_blog.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
-    }
-}
+DATABASES = {"default": {"ENGINE": "django.db.backends.sqlite3", "NAME": SQLITE_URL,}}
 
 
 # Password validation
