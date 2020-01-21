@@ -2,12 +2,13 @@ from django.shortcuts import render, redirect
 from django.views.generic.base import TemplateView
 from django.views import View
 from django.http import HttpResponse
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView
 from .models import Posts
 from .forms import UploadPostForm
 from .markdown_parser import parse_yaml_post
+
 
 # Create your views here.
 class HomeView(TemplateView):

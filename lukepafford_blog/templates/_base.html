@@ -17,8 +17,14 @@
   <body>
 
 <nav class="navbar sticky-top navbar-dark bg-dark justify-content-center">
-	<a class="nav-link navbar-right" href="{% url 'posts_list' %}">lukepafford.com <span class="fa fa-home"></span></a>
+	<a class="nav-link justify-content-center" href="{% url 'posts_list' %}">lukepafford.com <span class="fa fa-home"></span></a>
 </nav>
+
+<!--
+<nav class="navbar sticky-top navbar-dark bg-dark justify-content-end">
+	<button class="nav-link btn btn-link btn-group btn-group-vertical"><span class="fa fa-bars"></span></button>
+</nav>
+--!>
 
 	<div class="container">
 		{% block content %}
