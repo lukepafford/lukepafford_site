@@ -1,0 +1,22 @@
+- hosts: localhost
+  vars: 
+    projectDir: '{{ playbook_dir | dirname }}'
+    deployApp: "{{ lookup('env', 'DEPLOY_APP') | default(false) | bool }}"
+    twineUsername: '{{ lookup("env", "TWINE_USERNAME") }}'
+    twinePassword: '{{ lookup("env", "TWINE_PASSWORD") }}'
+    dockerRepository: 'lukepafford/lukepafford_blog'
+  tasks:
+    - name: Ensure all tests pass
+      command: pytest
+      args:
+        chdir: '{{ projectDir }}'
+      register: pytestResults
+      failed_when: pytestResults.rc not in [0, 5]
+
+    - name: Ensure flake8 passes
+      command: flake8
+      args:
+        chdir: '{{ projectDir }}'
+
+    - import_tasks: build.yml
+      when: deployApp

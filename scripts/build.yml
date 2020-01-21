@@ -1,0 +1,61 @@
+---
+- assert:
+    that:
+      - twineUsername != ""
+      - twinePassword != ""
+    fail_msg: 'The environment variables TWINE_USERNAME, and TWINE_PASSWORD must be set to deploy the app'
+
+
+- name: Increment project version number
+  command: > 
+    python
+    scripts/increment_setup_version.py
+    --version-type patch
+    setup.py
+  args:
+    chdir: '{{ projectDir }}'
+  register: newVersion
+
+
+- name: Purge any previous builds
+  file:
+    path: '{{ projectDir }}/dist/'
+    state: '{{ item }}'
+  loop:
+    - absent
+    - directory
+
+
+- name: Build the python package
+  command: python setup.py bdist_wheel
+  args:
+    chdir: '{{ projectDir }}'
+
+
+- name: Upload the package to pypi
+  command: >
+    twine
+    upload
+    --username {{ lookup('env', 'TWINE_USERNAME') }}
+    --password {{ lookup('env', 'TWINE_PASSWORD') }}
+    --skip-existing
+    dist/*
+  args:
+    chdir: '{{ projectDir }}'
+
+
+- name: Generate the pip requirements.txt file
+  copy:
+    content: >
+      django-lukepafford-blog=={{ newVersion.stdout }}
+    dest: '{{ playbook_dir }}/requirements.txt'
+
+
+- name: Build the container image
+  command: docker build --network host '{{ playbook_dir }}' -t {{ dockerRepository }}:{{ newVersion.stdout }}
+
+- name: Create the latest tag
+  command: docker tag {{ dockerRepository }}:{{ newVersion.stdout }} {{ dockerRepository }}:latest
+
+- name: Push the image to docker hub
+  command: docker push {{ dockerRepository }}:latest
