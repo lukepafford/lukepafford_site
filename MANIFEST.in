@@ -1,3 +1,2 @@
 recursive-include lukepafford_blog/templates *
-recursive-include lukepafford_blog/public/css *
 recursive-include lukepafford_blog/public/dist *

@@ -4,12 +4,20 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+pytest = "*"
 
 [packages]
 django = "*"
-black = "*"
 django-allauth = "*"
 django-environ = "*"
+pyyaml = "*"
+django-markdown-deux = "*"
+django-markdown2 = "*"
+flake8 = "*"
+gunicorn = "*"
+pytest = "*"
+twine = "*"
+django-lukepafford-blog = "*"
 
 [requires]
 python_version = "3.7"

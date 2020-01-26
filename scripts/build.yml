@@ -19,10 +19,17 @@
 
 - name: Purge any previous builds
   file:
-    path: '{{ projectDir }}/dist/'
-    state: '{{ item }}'
+    path: '{{ item }}'
+    state: absent
   loop:
-    - absent
+    - '{{ projectDir }}/dist'
+    - '{{ projectDir }}/build'
+
+- name: Recreate the dist directory
+  file:
+    path: '{{ projectDir }}/dist/'
+    state: directory
+  loop:
     - directory
 
 
@@ -42,6 +49,11 @@
     dist/*
   args:
     chdir: '{{ projectDir }}'
+
+
+- name: Pause to give time for the pypi package to become available for pip
+  pause:
+    seconds: 20
 
 
 - name: Generate the pip requirements.txt file
