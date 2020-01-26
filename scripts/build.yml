@@ -53,7 +53,7 @@
 
 - name: Pause to give time for the pypi package to become available for pip
   pause:
-    seconds: 20
+    seconds: 30
 
 
 - name: Generate the pip requirements.txt file

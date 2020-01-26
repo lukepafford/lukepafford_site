@@ -1,0 +1,26 @@
+- hosts: localhost
+  tasks:
+  - name: Build the static files
+    command: python manage.py collectstatic --noinput
+    args:
+      chdir: '{{ projectDir }}/lukepafford_blog'
+
+- hosts: cdn
+  become: yes
+  vars:
+    dest: /var/www/cdn/lukepafford_blog
+  tasks:
+    - name: Create the static directory
+      file:
+        path: '{{ dest }}'
+        state: directory
+        owner: nginx
+        group: nginx
+        mode: 0775
+
+    - name: Copy the static files to our CDN
+      synchronize:
+        src: '{{ projectDir }}/lukepafford_blog/static/'
+        dest: '{{ dest }}'
+        rsync_opts:
+          - '--chown=nginx:nginx'

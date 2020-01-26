@@ -21,6 +21,12 @@
     - import_tasks: build.yml
       when: deployApp
 
+
+- import_playbook: static_files.yml
+  vars:
+    projectDir: '{{ playbook_dir | dirname }}'
+  tags: static
+
 - hosts: app
   become: true
   tasks:
