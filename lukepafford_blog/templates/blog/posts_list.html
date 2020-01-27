@@ -11,7 +11,7 @@
 				<div class="card-title">
 					<h2><a href="{% url 'posts_detail' post.slug %}">{{ post.title }}</a></h2>
 				</div>
-				<div class="card-footer text-muted">Published {{ post.created_on }}</div>
+				<div class="card-footer text-muted">Published {{ post.created_on|date:'Y-m-d' }}</div>
 			</div>
 		</ul>
 	</div>
