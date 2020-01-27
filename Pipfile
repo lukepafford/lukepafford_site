@@ -18,6 +18,7 @@ gunicorn = "*"
 pytest = "*"
 twine = "*"
 django-lukepafford-blog = "*"
+pygments = "*"
 
 [requires]
 python_version = "3.7"

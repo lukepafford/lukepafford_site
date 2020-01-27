@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "e3277f2310466488a9f5b71d88564685033c76163e27b0c1efae7de021fb68a1"
+            "sha256": "49c7b0be4863c828ea2d64d70f7e6b1c1bcfe6cee13c1024b3690d3122814801"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -147,10 +147,10 @@
         },
         "django-lukepafford-blog": {
             "hashes": [
-                "sha256:a0af470b23d4f8f4f5b247a06e536b8aecc5c9fd2894e3be93208e4fa799522a"
+                "sha256:0b49a8272c3683ce85955b6d545db752190889c658cb315090e1b700e2e2065e"
             ],
             "index": "pypi",
-            "version": "==1.0.18"
+            "version": "==1.0.23"
         },
         "django-markdown-deux": {
             "hashes": [
@@ -307,6 +307,7 @@
                 "sha256:2a3fe295e54a20164a9df49c75fa58526d3be48e14aceba6d6b1e8ac0bfd6f1b",
                 "sha256:98c8aa5a9f778fcd1026a17361ddaf7330d1b7c62ae97c3bb0ae73e0b9b6b0fe"
             ],
+            "index": "pypi",
             "version": "==2.5.2"
         },
         "pyparsing": {

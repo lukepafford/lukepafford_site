@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="django-lukepafford-blog",
-    version="1.0.21",
+    version="1.0.24",
     description="Django site for personal blog, and anything else",
     url="https://github.com/lukepafford/lukepafford_site",
     author="Luke Pafford",
@@ -24,6 +24,7 @@ setup(
         "django-environ",
         "django-markdown-deux",
         "pyyaml",
+        "pygments",
         "gunicorn",
     ],
 )
