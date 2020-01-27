@@ -10,6 +10,7 @@ from .forms import UploadPostForm
 from .markdown_parser import parse_yaml_post
 from .date_conversions import extract_date_from_title
 
+
 # Create your views here.
 class HomeView(TemplateView):
     template_name = "_base.html"
@@ -41,7 +42,6 @@ class PostUpload(LoginRequiredMixin, DetailView):
             try:
                 created_on = extract_date_from_title(request.FILES["file"].name)
             except ValueError as e:
-                print("FUCKO WUCKO")
                 response = HttpResponse(e)
                 response.status_code = 422
                 return response
