@@ -2,13 +2,14 @@ from django.db import models
 from django.conf import settings
 from django.shortcuts import reverse
 from django.template.defaultfilters import slugify
+from django.utils import timezone
 
 
 class Posts(models.Model):
     title = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(max_length=100)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    created_on = models.DateTimeField(auto_now_add=True)
+    created_on = models.DateTimeField(default=timezone.now)
     updated_on = models.DateTimeField(auto_now=True)
     body = models.TextField()
 
