@@ -1,12 +1,12 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from django.views.generic.base import TemplateView
 from django.views import View
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView
-from .models import Posts
-from .forms import UploadPostForm
+from .models import Posts, Comments, Replies
+from .forms import UploadPostForm, CommentForm
 from .markdown_parser import parse_yaml_post
 from .date_conversions import extract_date_from_title
 
@@ -25,6 +25,27 @@ class PostList(ListView):
 class PostDetail(DetailView):
     model = Posts
     context_object_name = "post"
+    queryset = Posts.objects.all()
+
+    def get_queryset(self):
+        return self.queryset.filter(slug=self.kwargs.get("slug"))
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["commentForm"] = CommentForm
+        return context
+
+    # update the database from the form on POST
+    def post(self, request, *args, **kwargs):
+        print(request.POST)
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            post = Posts.objects.get(slug=kwargs["slug"])
+            comment = form.save(commit=False)
+            comment.commenter = request.user
+            comment.post = post
+            comment.save()
+        return redirect(reverse("posts_detail", kwargs={"slug": kwargs["slug"]}))
 
 
 class PostUpload(LoginRequiredMixin, DetailView):

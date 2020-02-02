@@ -29,9 +29,15 @@
 
 - hosts: app
   become: true
+  vars:
+    migrateDb: "{{ lookup('env', 'MIGRATE_DB') | default(false) | bool }}"
   tasks:
     - name: Restart the app
       service:
         name: lukepafford_blog
         state: restarted
         enabled: yes
+
+    - name: Migrate the database
+      command: docker exec lukepafford_blog.service manage.py migrate
+      when: migrateDb

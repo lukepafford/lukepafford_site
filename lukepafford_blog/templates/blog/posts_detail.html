@@ -12,5 +12,18 @@
 {{ post.body|markdown }}
 </p>
 
+<h1 id="Comments">Comments</h1>
+
+<form method="post">
+{% csrf_token %}
+{{ commentForm.comment }}
+<button class="btn btn-primary" type="submit">Submit</button>
+</form>
+
+<ul>
+{% for comment in post.comments_set.all %}
+<li>{{ comment }}</li>
+{% endfor %}
+</ul>
 
 {% endblock content %}
