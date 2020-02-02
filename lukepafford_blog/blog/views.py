@@ -37,7 +37,6 @@ class PostDetail(DetailView):
 
     # update the database from the form on POST
     def post(self, request, *args, **kwargs):
-        print(request.POST)
         form = CommentForm(request.POST)
         if form.is_valid():
             post = Posts.objects.get(slug=kwargs["slug"])
