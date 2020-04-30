@@ -20,7 +20,7 @@
   "homepage": "https://github.com/lukepafford/lukepafford_site#readme",
   "dependencies": {
     "@babel/polyfill": "^7.7.0",
-    "jquery": "^3.4.1"
+    "jquery": "^3.5.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.7",
